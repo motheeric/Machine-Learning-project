@@ -43,7 +43,7 @@ Data characteristics:
 
 The project includes a full processing pipeline:
 
-### ** Data preprocessing**
+### Data preprocessing
 - Standardization using `StandardScaler`
 - Handling imbalance with metrics & class weights
 - Outlier detection using z-scores
@@ -51,7 +51,7 @@ The project includes a full processing pipeline:
 - PCA for dimensionality reduction
 - Train/test split with stratification
 
-### ** Data exploration**
+### Data exploration
 - Histograms
 - Boxplots
 - Correlation heatmaps
@@ -112,5 +112,5 @@ Each model is evaluated using:
 
 ---
 
-## Repository Structure
+
 
