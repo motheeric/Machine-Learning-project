@@ -112,5 +112,9 @@ Each model is evaluated using:
 
 ---
 
+## Conclusion 
+
+This project demonstrates that reliable bankruptcy prediction is achievable through rigorous preprocessing and advanced machine learning models. Despite the strong class imbalance, ensemble methods such as XGBoost, LightGBM, and stacking deliver the best performance, especially in recall and PR-AUC. Overall, the study highlights the importance of appropriate evaluation metrics and a robust pipeline when dealing with complex financial data.
+
 
 
