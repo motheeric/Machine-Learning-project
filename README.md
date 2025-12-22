@@ -1,120 +1,142 @@
 # Company Bankruptcy Prediction  
-Machine Learning Project
-Team : Léa NAPASEUTH, Eric MOTHE, Pierre NIETO, Lou-Anne PEILLON
+Machine Learning Project – Final Version
 
-This project aims to predict whether a company is likely to go bankrupt based on a wide range of financial ratios.  
-It is part of a Machine Learning assignment focused on data analysis, modeling, and evaluation.
+**Team**  
+- Léa NAPASEUTH  
+- Eric MOTHE  
+- Pierre NIETO  
+- Lou-Anne PEILLON  
 
 ---
 
 ## Project Overview
 
-The goal of the project is to use financial and accounting indicators to classify companies into:
+This project aims to predict whether a company is likely to go bankrupt based on a wide range of financial ratios.  
+It follows a complete end-to-end machine learning workflow, from data exploration to model optimization and evaluation.
+
+The objective is to classify companies as:
 
 - **1 → Bankrupt**
 - **0 → Not Bankrupt**
 
-The dataset used comes from the *Company Bankruptcy Prediction* dataset (Kaggle) and contains:
-
-- **6,819 companies**
-- **96 numerical financial variables**
-- A highly **imbalanced target variable** (≈ 3% bankrupt companies)
+This task is particularly relevant for **banks, investors, auditors, and regulators**, as early bankruptcy detection helps reduce financial losses and improve risk management.
 
 ---
 
 ## Dataset Description
 
-The dataset includes several categories of financial indicators:
+The dataset used comes from the *Company Bankruptcy Prediction* dataset (Kaggle).
 
-- **Liquidity ratios** (e.g., Current Ratio)
-- **Profitability ratios** (e.g., ROA, Net Income to Total Assets)
-- **Leverage ratios** (e.g., Debt Ratio, Liability to Equity)
-- **Operating ratios** (e.g., Inventory Turnover)
+**Key characteristics:**
+- **6,819 companies**
+- **96 numerical financial variables**
+- **Target variable:** Bankruptcy (0/1)
+- **Strong class imbalance:** ~3.2% bankrupt companies
 
-Data characteristics:
+**Types of indicators included:**
+- Liquidity ratios  
+- Profitability ratios  
+- Leverage ratios  
+- Operating and efficiency ratios  
 
--  No missing values  
--  All variables numerical  
-- Severe imbalance → requires appropriate handling (class weights, metrics)
+**Data properties:**
+- No missing values  
+- All variables are numerical  
+- High correlation between several financial ratios  
+- Presence of outliers in some features  
 
 ---
 
-## Methods and Preprocessing
-
-The project includes a full processing pipeline:
-
-### Data preprocessing
-- Standardization using `StandardScaler`
-- Handling imbalance with metrics & class weights
-- Outlier detection using z-scores
-- Correlation analysis
-- PCA for dimensionality reduction
-- Train/test split with stratification
+## Data Exploration & Preprocessing
 
 ### Data exploration
-- Histograms
-- Boxplots
+- Histograms and boxplots
 - Correlation heatmaps
 - Quantile analysis
-- PCA variance ratio plot
+- PCA variance ratio analysis
+
+### Preprocessing steps
+- Median imputation
+- Feature scaling using `StandardScaler`
+- Outlier analysis (z-score based)
+- Dimensionality reduction with PCA
+- Stratified train/test split
+- Careful handling of class imbalance using adapted metrics and class weights
 
 ---
 
 ## Machine Learning Models Implemented
 
-### **Baseline**
+### Baseline models
 - Dummy Classifier  
 - Logistic Regression (class_weight = balanced)
 
-### **Classical ML models**
+### Classical ML models
 - Decision Tree  
 - Random Forest  
 - K-Nearest Neighbors  
-- Linear SVM  
+- Support Vector Machine (Linear SVM)  
 - Gradient Boosting Classifier  
 
-### **Advanced models**
-- **XGBoost**  
-- **LightGBM**  
-- **Multilayer Perceptron (MLP)**  
+### Advanced models
+- XGBoost  
+- LightGBM  
+- Multilayer Perceptron (MLP)
 
-### **Ensemble methods**
-- Voting Classifier (soft voting)  
-- Stacking Classifier  
+### Ensemble methods
+- Voting Classifier (soft voting)
+- Stacking Classifier
 
-Each model is evaluated using:
+---
+
+## Model Selection & Hyperparameter Tuning
+
+To improve model performance and generalization, hyperparameter optimization was performed using:
+
+- **GridSearchCV** for exhaustive parameter tuning
+- **RandomizedSearchCV** for efficient exploration of large parameter spaces
+
+This step helped:
+- Reduce overfitting
+- Improve robustness
+- Optimize recall and PR-AUC for the minority class (bankrupt companies)
+
+---
+
+## Evaluation Metrics
+
+Due to the severe class imbalance, accuracy was not used as a primary metric.  
+Models were evaluated using:
 
 - ROC-AUC  
-- PR-AUC  
+- PR-AUC (priority metric)
 - Precision  
 - Recall  
 - F1-score  
-- Confusion matrix  
+- Confusion matrices  
 
 ---
 
 ## Results Summary
 
-- Baseline model fails to detect bankrupt companies  
-- Logistic Regression (balanced) significantly improves recall  
-- Random Forest + Gradient Boosting provide strong performance  
-- **XGBoost and LightGBM are the best-performing models overall**  
-- Ensemble methods further stabilize performance across metrics  
+- Baseline models fail to detect bankrupt companies
+- Logistic Regression (balanced) significantly improves recall
+- Tree-based models outperform linear models
+- Boosting models (LightGBM, XGBoost, Gradient Boosting) achieve the best overall performance
+- **LightGBM** obtains the highest ROC-AUC (≈ 0.95)
+- Ensemble methods stabilize performance across evaluation metrics
 
 ---
 
 ## Main Challenges
 
-- Extreme class imbalance (97% vs 3%)  
-- Need for careful evaluation (PR-AUC over accuracy)  
-- Avoiding overfitting with complex models  
-- Choosing relevant features out of 95+ indicators  
+- Extreme class imbalance (97% vs 3%)
+- Feature redundancy and strong correlations
+- Risk of overfitting with complex models
+- Trade-off between interpretability and performance
 
 ---
 
-## Conclusion 
+## Conclusion
 
-This project demonstrates that reliable bankruptcy prediction is achievable through rigorous preprocessing and advanced machine learning models. Despite the strong class imbalance, ensemble methods such as XGBoost, LightGBM, and stacking deliver the best performance, especially in recall and PR-AUC. Overall, the study highlights the importance of appropriate evaluation metrics and a robust pipeline when dealing with complex financial data.
-
-
-
+This project shows that reliable bankruptcy prediction is achievable through rigorous preprocessing, appropriate evaluation metrics, and advanced ensemble learning methods. Boosting-based models combined with hyperparameter tuning provide the best results, making the final pipeline suitable for real-world financial risk screening and decision-support systems.
